@@ -33,12 +33,7 @@ flutter:
     - assets/icons/
     - assets/svg_images/
 
-
-
   fonts:
-     - family: Poppins
-       fonts:
-         - asset: assets/fonts/Poppins-.ttf
-
-
-
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-.ttf
