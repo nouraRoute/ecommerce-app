@@ -1,5 +1,8 @@
 import 'package:ecommerce_app/core/widget/custom_elevated_button.dart';
+import 'package:ecommerce_app/features/auth/data/models/sign_up_parameters.dart';
+import 'package:ecommerce_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -82,7 +85,15 @@ class SignUpScreen extends StatelessWidget {
                       backgroundColor: ColorManager.white,
                       textStyle: getBoldStyle(
                           color: ColorManager.primary, fontSize: AppSize.s20),
-                      onTap: () {},
+                      onTap: () {
+                        BlocProvider.of<AuthCubit>(context).signUp(
+                            SignUpParameters(
+                                email: 'nouraxx18@gmail.com',
+                                password: '13456789',
+                                phone: '01146080050',
+                                rePassword: '13456789',
+                                name: 'xxx'));
+                      },
                     ),
                   ),
                 ),

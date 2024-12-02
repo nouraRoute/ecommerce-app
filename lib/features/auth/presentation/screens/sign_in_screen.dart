@@ -5,7 +5,10 @@ import 'package:ecommerce_app/core/routes_manager/routes.dart';
 import 'package:ecommerce_app/core/widget/custom_elevated_button.dart';
 import 'package:ecommerce_app/core/widget/main_text_field.dart';
 import 'package:ecommerce_app/core/widget/validators.dart';
+import 'package:ecommerce_app/features/auth/data/models/sign_in_parameters.dart';
+import 'package:ecommerce_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -93,8 +96,12 @@ class SignInScreen extends StatelessWidget {
                       textStyle: getBoldStyle(
                           color: ColorManager.primary, fontSize: AppSize.s18),
                       onTap: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, Routes.mainRoute, (route) => false);
+                        BlocProvider.of<AuthCubit>(context).signIn(
+                            SignInParameters(
+                                email: 'nouraxx18@gmail.com',
+                                password: '13456789'));
+                        // Navigator.pushNamedAndRemoveUntil(
+                        //     context, Routes.mainRoute, (route) => false);
                       },
                     ),
                   ),
