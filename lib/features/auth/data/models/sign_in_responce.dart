@@ -1,8 +1,8 @@
-import 'package:ecommerce_app/features/auth/data/models/user_model.dart';
+import 'package:ecommerce_app/features/auth/data/models/user_response.dart';
 
 class SignInResponce {
   String message;
-  UserModel user;
+  UserResponse user;
   String token;
 
   SignInResponce(
@@ -10,7 +10,7 @@ class SignInResponce {
 
   SignInResponce.fromJson(Map<String, dynamic> json)
       : message = json["message"],
-        user = UserModel.fromJson(json["user"]),
+        user = UserResponse.fromJson(json["user"]),
         token = json["token"];
 
   static List<SignInResponce> fromList(List<Map<String, dynamic>> list) {

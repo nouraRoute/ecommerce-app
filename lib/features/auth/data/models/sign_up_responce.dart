@@ -1,8 +1,8 @@
-import 'package:ecommerce_app/features/auth/data/models/user_model.dart';
+import 'package:ecommerce_app/features/auth/data/models/user_response.dart';
 
 class SignUpResponce {
   String message;
-  UserModel user;
+  UserResponse user;
   String token;
 
   SignUpResponce(
@@ -10,6 +10,6 @@ class SignUpResponce {
 
   SignUpResponce.fromJson(Map<String, dynamic> json)
       : message = json["message"],
-        user = UserModel.fromJson(json["user"]),
+        user = UserResponse.fromJson(json["user"]),
         token = json["token"];
 }

@@ -9,7 +9,7 @@ class CustomElevatedButton extends StatelessWidget {
   final String label;
   final Color? backgroundColor;
   final double? radius;
-  final void Function() onTap;
+  final void Function()? onTap;
   final TextStyle? textStyle;
   final bool isStadiumBorder;
 
@@ -22,7 +22,7 @@ class CustomElevatedButton extends StatelessWidget {
       this.radius,
       this.suffixIcon,
       required this.label,
-      required this.onTap});
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
