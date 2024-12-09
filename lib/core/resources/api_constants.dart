@@ -3,4 +3,5 @@ class ApiConstants {
   static String signUpEndPoint = '/auth/signup';
   static String signInEndPoint = '/auth/signin';
   static String getAllCategories = '/categories';
+  static String getProducts = '/products';
 }

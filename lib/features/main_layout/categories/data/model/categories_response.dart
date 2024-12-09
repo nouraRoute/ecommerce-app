@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/core/models/meta_data_response.dart';
+
 class CategoriesListResponse {
   int? results;
   Metadata? metadata;
@@ -89,38 +91,6 @@ class CategoryResponse {
     _data["image"] = image;
     _data["createdAt"] = createdAt;
     _data["updatedAt"] = updatedAt;
-    return _data;
-  }
-}
-
-class Metadata {
-  int? currentPage;
-  int? numberOfPages;
-  int? limit;
-
-  Metadata({this.currentPage, this.numberOfPages, this.limit});
-
-  Metadata.fromJson(Map<String, dynamic> json) {
-    if (json["currentPage"] is int) {
-      currentPage = json["currentPage"];
-    }
-    if (json["numberOfPages"] is int) {
-      numberOfPages = json["numberOfPages"];
-    }
-    if (json["limit"] is int) {
-      limit = json["limit"];
-    }
-  }
-
-  static List<Metadata> fromList(List<Map<String, dynamic>> list) {
-    return list.map(Metadata.fromJson).toList();
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["currentPage"] = currentPage;
-    _data["numberOfPages"] = numberOfPages;
-    _data["limit"] = limit;
     return _data;
   }
 }
