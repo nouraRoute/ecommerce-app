@@ -1,6 +1,10 @@
 import 'dart:async';
+import 'package:ecommerce_app/core/di/service_locatop.dart';
+import 'package:ecommerce_app/features/main_layout/categories/presentation/cubit/categories_cubit.dart';
+import 'package:ecommerce_app/features/main_layout/categories/presentation/cubit/categories_states.dart';
 import 'package:ecommerce_app/features/main_layout/home/presentation/widgets/custom_category_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/resources/assets_manager.dart';
@@ -17,7 +21,7 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   int _currentIndex = 0;
   late Timer _timer;
-
+  late CategoriesCubit cubit;
   final List<String> adsImages = [
     ImageAssets.carouselSlider1,
     ImageAssets.carouselSlider2,
@@ -28,6 +32,7 @@ class _HomeTabState extends State<HomeTab> {
   void initState() {
     super.initState();
     _startImageSwitching();
+    cubit = serviceLocator.get<CategoriesCubit>();
   }
 
   void _startImageSwitching() {
@@ -57,17 +62,39 @@ class _HomeTabState extends State<HomeTab> {
           Column(
             children: [
               CustomSectionBar(sectionNname: 'Categories', function: () {}),
-              SizedBox(
-                height: 270.h,
-                child: GridView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return const CustomCategoryWidget();
+              BlocProvider<CategoriesCubit>(
+                create: (context) => cubit,
+                child: BlocBuilder<CategoriesCubit, CategoriesState>(
+                  builder: (context, state) {
+                    if (state is GetAllCategoriesLoadingState) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is GetAllCategoriesErrorState) {
+                      return Center(
+                        child: Text(state.message),
+                      );
+                    } else if (state is GetAllCategoriesSuccessState) {
+                      return SizedBox(
+                        height: 270.h,
+                        child: GridView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return CustomCategoryWidget(
+                              categoryModel: state.categoriesList[index],
+                            );
+                          },
+                          itemCount: state.categoriesList.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                          ),
+                        ),
+                      );
+                    } else {
+                      return SizedBox();
+                    }
                   },
-                  itemCount: 20,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
                 ),
               ),
               // SizedBox(height: 12.h),

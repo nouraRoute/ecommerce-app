@@ -5,6 +5,7 @@ import 'package:ecommerce_app/features/main_layout/categories/presentation/categ
 import 'package:ecommerce_app/features/main_layout/favourite/presentation/favourite_screen.dart';
 import 'package:ecommerce_app/features/main_layout/profile_tab/presentation/profile_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'home/presentation/home_tab.dart';
 
