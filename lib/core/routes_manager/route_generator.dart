@@ -4,8 +4,8 @@ import 'package:ecommerce_app/features/auth/presentation/screens/sign_up_screen.
 import 'package:ecommerce_app/features/cart/screens/cart_screen.dart';
 import 'package:ecommerce_app/features/main_layout/main_layout.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product_model.dart';
-import 'package:ecommerce_app/features/product_details/presentation/screen/product_details.dart';
-import 'package:ecommerce_app/features/products_screen/presentation/screens/products_screen.dart';
+import 'package:ecommerce_app/features/product/presentation/product_details/screen/product_details.dart';
+import 'package:ecommerce_app/features/product/presentation/products_screen/screens/products_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {

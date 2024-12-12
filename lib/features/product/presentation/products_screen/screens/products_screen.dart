@@ -6,10 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecommerce_app/core/di/service_locatop.dart';
 import 'package:ecommerce_app/core/resources/values_manager.dart';
 import 'package:ecommerce_app/features/product/presentation/cubit/product_cubit.dart';
-import 'package:ecommerce_app/features/products_screen/presentation/widgets/custom_product_widget.dart';
+import 'package:ecommerce_app/features/product/presentation/products_screen/widgets/custom_product_widget.dart';
 
-import '../../../../core/resources/assets_manager.dart';
-import '../../../../core/widget/home_screen_app_bar.dart';
+import '../../../../../core/resources/assets_manager.dart';
+import '../../../../../core/widget/home_screen_app_bar.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({
