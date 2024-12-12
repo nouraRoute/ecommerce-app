@@ -121,11 +121,11 @@ class CartItemWidget extends StatelessWidget {
                               fontSize: AppSize.s18.sp),
                         ),
                       ),
-                      ProductCounter(
-                        add: onIncrementTap,
-                        productCounter: quantity,
-                        remove: onDecrementTap,
-                      )
+                      // ProductCounter(
+                      //   add: onIncrementTap,
+                      //   productCounter: quantity,
+                      //   remove: onDecrementTap,
+                      // )
                     ],
                   ),
                 ],
