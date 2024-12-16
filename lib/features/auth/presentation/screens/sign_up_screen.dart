@@ -60,13 +60,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         .pushReplacementNamed(Routes.mainRoute);
                   }
                   if (state is AuthSignUpLoadingState) {
-                    UIUtils.showLoadingDialog(context);
+                    UIUtils.showLoadingDialog();
                   } else if (state is AuthSignUpSuccessState) {
-                    UIUtils.hideDialog(context);
+                    UIUtils.hideDialog();
                     Navigator.pushReplacementNamed(context, Routes.mainRoute);
                   } else if (state is AuthSignUpErrorState) {
-                    UIUtils.hideDialog(context);
-                    UIUtils.showErrorDialog(context, state.message);
+                    UIUtils.hideDialog();
+                    UIUtils.showErrorDialog(state.message);
                   }
                 },
                 child: Column(

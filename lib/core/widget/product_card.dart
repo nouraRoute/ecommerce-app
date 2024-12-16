@@ -1,7 +1,9 @@
 import 'package:ecommerce_app/core/resources/assets_manager.dart';
 import 'package:ecommerce_app/core/resources/color_manager.dart';
 import 'package:ecommerce_app/core/resources/styles_manager.dart';
+import 'package:ecommerce_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductCard extends StatelessWidget {
@@ -187,7 +189,9 @@ class ProductCard extends StatelessWidget {
                           ],
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            //   cubit.addProductToCart(productID)
+                          },
                           child: Icon(
                             Icons.add_circle_rounded,
                             color: ColorManager.primary,

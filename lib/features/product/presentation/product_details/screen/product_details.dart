@@ -2,7 +2,9 @@ import 'package:ecommerce_app/core/di/service_locatop.dart';
 import 'package:ecommerce_app/core/resources/assets_manager.dart';
 import 'package:ecommerce_app/core/resources/color_manager.dart';
 import 'package:ecommerce_app/core/resources/styles_manager.dart';
+import 'package:ecommerce_app/core/utils/ui_utils.dart';
 import 'package:ecommerce_app/core/widget/custom_elevated_button.dart';
+import 'package:ecommerce_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product_model.dart';
 import 'package:ecommerce_app/features/product/presentation/cubit/product_cubit.dart';
 import 'package:ecommerce_app/features/product/presentation/product_details/widgets/product_description.dart';
@@ -70,7 +72,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               ProductLabel(
                   productName: widget.productModel.title ?? "",
-                  productPrice: 'EGP ${widget.productModel.price ?? ""}'),
+                  productPrice: 'EGP ${(widget.productModel.price ?? 1)}'),
               SizedBox(
                 height: 16.h,
               ),
@@ -102,9 +104,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                       if (widget.productModel.price != null)
                         BlocBuilder<ProductCubit, ProductState>(
                           builder: (context, state) {
-                            var cubit = BlocProvider.of<ProductCubit>(context);
                             return Text(
-                                'EGP ${widget.productModel.price! * cubit.quantity}',
+                                'EGP ${widget.productModel.price! * productCubit.quantity}',
                                 style: getMediumStyle(
                                         color: ColorManager.appBarTitleColor)
                                     .copyWith(fontSize: 18.sp));
@@ -118,7 +119,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Expanded(
                     child: CustomElevatedButton(
                       label: 'Add to cart',
-                      onTap: () {},
+                      onTap: () {
+                        BlocProvider.of<CartCubit>(context)
+                            .addProductWithQuantity(
+                                widget.productModel.id!, productCubit.quantity);
+                      },
                       prefixIcon: Icon(
                         Icons.add_shopping_cart_outlined,
                         color: ColorManager.white,

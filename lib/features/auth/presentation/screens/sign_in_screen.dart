@@ -121,14 +121,14 @@ class _SignInScreenState extends State<SignInScreen> {
                                 .pushReplacementNamed(Routes.mainRoute);
                           }
                           if (state is AuthSignInLoadingState) {
-                            UIUtils.showLoadingDialog(context);
+                            UIUtils.showLoadingDialog();
                           } else if (state is AuthSignInSuccessState) {
-                            UIUtils.hideDialog(context);
+                            UIUtils.hideDialog();
                             Navigator.pushReplacementNamed(
                                 context, Routes.mainRoute);
                           } else if (state is AuthSignInErrorState) {
-                            UIUtils.hideDialog(context);
-                            UIUtils.showErrorDialog(context, state.message);
+                            UIUtils.hideDialog();
+                            UIUtils.showErrorDialog(state.message);
                           }
                         },
                         child: CustomElevatedButton(

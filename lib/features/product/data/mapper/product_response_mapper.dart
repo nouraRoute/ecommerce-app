@@ -2,7 +2,7 @@ import 'package:ecommerce_app/features/product/data/models/products_list_respons
 import 'package:ecommerce_app/features/product/domain/entities/product_model.dart';
 
 extension ProductResponseMapper on ProductResponse {
-  ProductModel productResponseToProductModel() => ProductModel(
+  ProductModel toEntity() => ProductModel(
         description: description,
         id: id,
         imageCover: imageCover,

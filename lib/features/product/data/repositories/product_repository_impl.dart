@@ -22,7 +22,7 @@ class ProductRepositoryImpl implements ProductRepository {
       var response = await productDataSource.getProductsList(parameters);
       return right((response.productsList ?? [])
           .map(
-            (e) => e.productResponseToProductModel(),
+            (e) => e.toEntity(),
           )
           .toList());
     } on AppExceptions catch (e) {

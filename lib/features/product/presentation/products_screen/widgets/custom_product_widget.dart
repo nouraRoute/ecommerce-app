@@ -1,9 +1,12 @@
 import 'package:ecommerce_app/core/resources/color_manager.dart';
 import 'package:ecommerce_app/core/resources/styles_manager.dart';
 import 'package:ecommerce_app/core/routes_manager/routes.dart';
+import 'package:ecommerce_app/core/utils/ui_utils.dart';
 import 'package:ecommerce_app/core/widget/heart_button.dart';
+import 'package:ecommerce_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomProductWidget extends StatelessWidget {
@@ -38,6 +41,8 @@ class CustomProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = BlocProvider.of<CartCubit>(context);
+
     return InkWell(
       onTap: () => Navigator.pushNamed(context, Routes.productDetails,
           arguments: productModel),
@@ -153,20 +158,41 @@ class CustomProductWidget extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: InkWell(
-                            onTap: () {},
-                            child: Container(
-                              height: height * 0.036,
-                              width: width * 0.08,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: ColorManager.primary,
-                              ),
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.white,
+                        BlocListener<CartCubit, CartState>(
+                          listener: (context, state) {
+                            print("xXXXXX->previous");
+                            if (state is AddProductLoading ||
+                                state is UpdateProductQuantityLoading) {
+                              UIUtils.showLoadingDialog();
+                            } else if (state is AddProductError ||
+                                state is UpdateProductQuantityError) {
+                              UIUtils.hideDialog();
+                              UIUtils.showErrorDialog(state is AddProductError
+                                  ? state.errorMessage
+                                  : (state as UpdateProductQuantityError)
+                                      .errorMessage);
+                            } else if (state is AddProductSuccess ||
+                                state is UpdateProductQuantitySuccess) {
+                              UIUtils.hideDialog();
+                            }
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: InkWell(
+                              onTap: () {
+                                cubit.addProductToCart(productModel.id!);
+                              },
+                              child: Container(
+                                height: height * 0.036,
+                                width: width * 0.08,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: ColorManager.primary,
+                                ),
+                                child: const Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

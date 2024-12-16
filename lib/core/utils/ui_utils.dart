@@ -1,9 +1,11 @@
+import 'package:ecommerce_app/core/routes_manager/route_generator.dart';
 import 'package:flutter/material.dart';
 
 class UIUtils {
-  static void showLoadingDialog(BuildContext context) {
+  static void showLoadingDialog() {
     showDialog(
-      context: context,
+      context: navigatorKey.currentContext!,
+      barrierColor: Colors.black.withOpacity(.1),
       barrierDismissible: false,
       builder: (BuildContext context) {
         return PopScope(
@@ -24,13 +26,13 @@ class UIUtils {
     );
   }
 
-  static void hideDialog(BuildContext context) {
-    Navigator.of(context, rootNavigator: true).pop();
+  static void hideDialog() {
+    Navigator.of(navigatorKey.currentContext!, rootNavigator: true).pop();
   }
 
-  static void showErrorDialog(BuildContext context, String message) {
+  static void showErrorDialog(String message) {
     showDialog(
-      context: context,
+      context: navigatorKey.currentContext!,
       builder: (BuildContext context) {
         return PopScope(
           onPopInvokedWithResult: (didPop, result) async => false,

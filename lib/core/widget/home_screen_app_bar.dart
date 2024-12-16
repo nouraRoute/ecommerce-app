@@ -4,7 +4,9 @@ import 'package:ecommerce_app/core/resources/font_manager.dart';
 import 'package:ecommerce_app/core/resources/styles_manager.dart';
 import 'package:ecommerce_app/core/resources/values_manager.dart';
 import 'package:ecommerce_app/core/routes_manager/routes.dart';
+import 'package:ecommerce_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -14,6 +16,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cartCubit = BlocProvider.of<CartCubit>(context);
     return AppBar(
       surfaceTintColor: Colors.white,
       automaticallyImplyLeading: automaticallyImplyLeading ?? false,
@@ -69,13 +72,22 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                 ),
-                IconButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, Routes.cartRoute),
-                    icon: ImageIcon(
-                      AssetImage(IconsAssets.icCart),
-                      color: ColorManager.primary,
-                    ))
+                BlocBuilder<CartCubit, CartState>(
+                  builder: (context, state) {
+                    return IconButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, Routes.cartRoute),
+                        icon: Badge.count(
+                          count: cartCubit.cart?.numOfCartItems ?? 0,
+                          isLabelVisible:
+                              cartCubit.cart?.numOfCartItems != null,
+                          child: ImageIcon(
+                            AssetImage(IconsAssets.icCart),
+                            color: ColorManager.primary,
+                          ),
+                        ));
+                  },
+                )
               ],
             ),
           )),
