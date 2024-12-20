@@ -58,8 +58,12 @@ import 'package:ecommerce_app/features/main_layout/categories/domain/repository/
     as _i12;
 import 'package:ecommerce_app/features/main_layout/categories/domain/use_case/get_all_categories_usecase.dart'
     as _i925;
+import 'package:ecommerce_app/features/main_layout/categories/domain/use_case/get_sub_categories_usecase.dart'
+    as _i1024;
 import 'package:ecommerce_app/features/main_layout/categories/presentation/cubit/categories_cubit.dart'
     as _i303;
+import 'package:ecommerce_app/features/main_layout/categories/presentation/sub_categories/cubit/sub_categories_cubit.dart'
+    as _i526;
 import 'package:ecommerce_app/features/product/data/datasources/product_data_source.dart'
     as _i74;
 import 'package:ecommerce_app/features/product/data/datasources/product_remote_data_source.dart'
@@ -121,6 +125,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i925.GetAllCategoriesUsecase>(() =>
         _i925.GetAllCategoriesUsecase(
             categoriesRepository: gh<_i12.CategoriesRepository>()));
+    gh.lazySingleton<_i1024.GetSubCategoriesUsecase>(() =>
+        _i1024.GetSubCategoriesUsecase(
+            categoriesRepository: gh<_i12.CategoriesRepository>()));
     gh.singleton<_i118.AuthCubit>(() => _i118.AuthCubit(
           gh<_i437.SignInUseCase>(),
           gh<_i252.GetTokenUseCase>(),
@@ -128,6 +135,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.lazySingleton<_i182.CartRepository>(() =>
         _i84.CartRepositoryImpl(cartDataSource: gh<_i868.CartDataSource>()));
+    gh.lazySingleton<_i526.SubCategoriesCubit>(
+        () => _i526.SubCategoriesCubit(gh<_i1024.GetSubCategoriesUsecase>()));
     gh.lazySingleton<_i555.GetCartUsecase>(
         () => _i555.GetCartUsecase(cartRepository: gh<_i182.CartRepository>()));
     gh.lazySingleton<_i229.AddToCartUsecase>(() =>

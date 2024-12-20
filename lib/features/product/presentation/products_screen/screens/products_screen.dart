@@ -14,9 +14,9 @@ import '../../../../../core/widget/home_screen_app_bar.dart';
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({
     Key? key,
-    required this.categoryId,
+    required this.parameters,
   }) : super(key: key);
-  final String categoryId;
+  final ProductParameters parameters;
   @override
   State<ProductsScreen> createState() => _ProductsScreenState();
 }
@@ -28,8 +28,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _productCubit
-        .getAllProducts(ProductParameters(categoryId: widget.categoryId));
+    _productCubit.getAllProducts(widget.parameters);
   }
 
   @override

@@ -4,6 +4,7 @@ import 'package:ecommerce_app/features/auth/presentation/screens/sign_up_screen.
 import 'package:ecommerce_app/features/cart/presentation/widgets/screens/cart_screen.dart';
 import 'package:ecommerce_app/features/main_layout/main_layout.dart';
 import 'package:ecommerce_app/features/product/domain/entities/product_model.dart';
+import 'package:ecommerce_app/features/product/domain/entities/product_parameters.dart';
 import 'package:ecommerce_app/features/product/presentation/product_details/screen/product_details.dart';
 import 'package:ecommerce_app/features/product/presentation/products_screen/screens/products_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +22,10 @@ class RouteGenerator {
       case Routes.productsScreen:
         return MaterialPageRoute(
             builder: (_) {
+              ProductParameters parameters =
+                  settings.arguments as ProductParameters;
               return ProductsScreen(
-                categoryId: settings.arguments as String,
+                parameters: parameters,
               );
             },
             settings: settings);

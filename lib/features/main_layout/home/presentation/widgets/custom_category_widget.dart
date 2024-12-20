@@ -3,6 +3,7 @@ import 'package:ecommerce_app/core/resources/color_manager.dart';
 import 'package:ecommerce_app/core/resources/styles_manager.dart';
 import 'package:ecommerce_app/core/routes_manager/routes.dart';
 import 'package:ecommerce_app/features/main_layout/categories/domain/entities/category_model.dart';
+import 'package:ecommerce_app/features/product/domain/entities/product_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,8 +15,8 @@ class CustomCategoryWidget extends StatelessWidget {
     return GestureDetector(
       onTap: categoryModel.id == null
           ? null
-          : () => Navigator.of(context)
-              .pushNamed(Routes.productsScreen, arguments: categoryModel.id),
+          : () => Navigator.of(context).pushNamed(Routes.productsScreen,
+              arguments: ProductParameters(categoryId: categoryModel.id)),
       child: Column(
         children: [
           // CachedNetworkImage(

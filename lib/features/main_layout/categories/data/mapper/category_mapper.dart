@@ -2,7 +2,7 @@ import 'package:ecommerce_app/features/main_layout/categories/data/model/categor
 import 'package:ecommerce_app/features/main_layout/categories/domain/entities/category_model.dart';
 
 extension CategoryMapper on CategoryResponse {
-  CategoryModel categoryResponseToCategoryModel() => CategoryModel(
+  CategoryModel toEntity() => CategoryModel(
         id: id,
         name: name,
         slug: slug,

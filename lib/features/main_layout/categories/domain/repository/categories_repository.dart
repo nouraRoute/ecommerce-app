@@ -4,4 +4,5 @@ import 'package:ecommerce_app/features/main_layout/categories/domain/entities/ca
 
 abstract class CategoriesRepository {
   Future<Either<Failure, List<CategoryModel>>> getAllCategories();
+  Future<Either<Failure, List<CategoryModel>>> getSubCategories(String id);
 }
